@@ -1,0 +1,65 @@
+<header class = "background_cover_who" 
+        style = "background-image:url(<%= asset_path "coding.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Coding
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class = "container" style="width: 80%; text-align: center; padding-top: 100px;">
+  <h1>Coding is nothing</h1>
+  <p class="lead">I'm ....a intelligent programmer</p>
+    <select id ="mySelect" style = "margin-bottom:15px; float:left">
+      <% @projects.each do |p| %>
+        <option id="id" value = "<%= p.id %>"><%= p.project_name %></option>
+      <% end %>
+    </select>
+    <div class="form-group">
+      <input id ="name" type="text" class="form-control" name="title" placeholder="제목">
+    </div>
+    <div class="form-group">
+      <textarea id="content" class="form-control" name="content" placeholder= "내용"></textarea>
+    </div>
+    <br>
+    <a href ="/home/create_coding" id="btn" class="btn btn-success">등록하기</a>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#btn").click(function(){
+      $.ajax({
+        data: {
+                project_id: document.getElementById("mySelect").value,
+                title: $("#name").val(),
+                content: $("#content").val()
+              },
+        url: "/home/create_coding",
+        method: "POST"
+      });
+    });
+  });
+</script>

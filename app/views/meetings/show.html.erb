@@ -1,0 +1,50 @@
+<header class = "background_cover_who" 
+        style = "background-image:url(<%= asset_path "calendar.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Plan
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+<div class ="container" align="center">
+	<div class ="row">
+		<div class = "col-xs-4" align="right">
+			<p>
+			  <strong>Name:</strong>
+			  <%= @meeting.name %>
+			</p>
+		</div>
+		<div class ="col-xs-8">
+			<p>
+			  <strong>Start time:</strong>
+			  <%= @meeting.start_time %>
+			</p>
+		</div>
+	</div>
+<%= link_to 'Edit', edit_meeting_path(@meeting) %> |
+<%= link_to 'Back', '/home/plan' %>
+</div>
+

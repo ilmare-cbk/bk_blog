@@ -1,0 +1,62 @@
+<header class = "background_cover_who" 
+        style = "background-image:url(<%= asset_path "calendar.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Plan
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class ="container" align="center">
+<h1>Listing Meetings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Start time</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @meetings.each do |meeting| %>
+      <tr>
+        <td><%= meeting.name %></td>
+        <td><%= meeting.start_time %></td>
+        <td><%= link_to 'Show', meeting %></td>
+        <td><%= link_to 'Edit', edit_meeting_path(meeting) %></td>
+        <td><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Meeting', new_meeting_path %>
+</div>
+

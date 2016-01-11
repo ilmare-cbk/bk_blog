@@ -1,0 +1,77 @@
+<header class = "background_cover_who" 
+      style = "background-image:url(<%= asset_path "picture.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Picture
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class = "container">
+  <div class ="row">
+    <div class = "col-lg-8 col-md-8 col-sm-12" style="text-align:center">
+      <div class ="row">
+        <img src="<%= @picture.my_image.url %>" style="width:auto; height:400px">
+      </div>
+      <div class ="row" style="text-align:center; margin-top:10px">
+          <%= @picture.title %>
+          <a href ="/home/delete_picture/<%= @picture.id %>" class="btn btn-default btn-xs">Delete</a>
+          <a href ="/home/edit_picture/<%= @picture.id %>" class="btn btn-default btn-xs">Edit</a>
+      </div>
+    </div>
+
+    <div class = "col-lg-4 col-md-4 col-sm-12" style="height:auto">
+      <div class = "row">
+        <%=form_tag "/home/send_reply", method: "post" do %>
+          <input type="hidden" name = "id" value="<%=@picture.id %>">
+          <input type="text" class="form-control" style ="margin-top:5px" name="user_name" placeholder="name">
+          <input type="text" class="form-control" style ="margin-top:5px" name="msg" placeholder="comments">
+          <div style="float:left; margin-right:2px">
+            <input type="password" class="form-control" style ="margin-top:5px" name="password" placeholder="password">
+          </div>
+          <div style="float:left">
+          <button class="btn btn-success" href="#" role="button" style ="margin-top:5px;">Comment</button>
+          </div>
+        <% end %>
+      </div>
+
+      <div class = "row" style="overflow:scroll; overflow-x:hidden; margin-top:20px; margin-left:0px; margin-right:0px; height:250px">
+        <% @picture.replies.each do |r| %>
+          <div class ="col-xs-12" style="margin-top:5px; margin-left:0px; margin-right:0px; float:left; padding:0px">
+              <div class ="well" style="padding:0px;margin-bottom:5px">
+                <p><%= r.user_name %> : <%= r.content %></p>
+                <%=form_tag "/home/delete_reply", method: "post" do %>
+                  <input type ="hidden" name="reply_id" value="<%= r.id %>">
+                  <input type="password" name="password" placeholder="pw">
+                  <input type="submit" value="delete">
+                <% end %>
+              </div>
+          </div>
+        <% end %> 
+      </div>
+    </div>
+  </div>  
+</div>

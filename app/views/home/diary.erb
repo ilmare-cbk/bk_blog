@@ -1,0 +1,57 @@
+<header class = "background_cover_who" 
+        style = "background-image:url(<%= asset_path "diary.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Diary
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class ="container" align="right" style="margin-bottom: 15px">
+  <a href="/home/write_diary" type="button" class="btn btn-default btn-xs" style = "margin-right: 60px">글쓰기</a>
+</div>
+
+
+<!-- Comment 시작 -->
+<div class="row">
+  <div id ="aa" class="col-lg-12">
+
+    <% @diaries.each do |d| %>
+         <a href = "/home/detail_diary/<%= d.id %>" style ="text-decoration:none">
+             <div class="well" style="width: 80%; margin: auto;">
+                 title: <%= d.title %><br>
+                 content: <%= d.content %>
+            </div>
+        </a>
+        <hr class="container featurette-divider" style="margin-top:20px; margin-bottom:20px; width: 80%">
+    <% end %>
+  </div>
+</div>
+<!-- Comment 끝 -->
+
+<div class="row text-center apple_pagination">
+    <%= will_paginate @diaries %>
+</div>

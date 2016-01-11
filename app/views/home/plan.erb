@@ -1,0 +1,74 @@
+<header class = "background_cover_who" 
+        style = "background-image:url(<%= asset_path "calendar.jpg" %>); padding-top:10px" >
+<!-- bar 시작 -->
+    <div class ="container">
+        <ul class="nav nav-pills" style="float:right">
+            <li role="presentation" class="clickable"><a href="/">메인</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="/home/who">Who am I?</a></li>
+                  <li><a id="diary" href="#">Diary</a></li>
+                  <li><a href="/home/plan">Plan</a></li>
+                  <li><a href="/home/coding">Coding</a></li>
+                  <li><a href="/home/picture">Picture</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+<!-- bar 끝 -->
+    <div class="background_cover_in" style="padding-top:150px; padding-bottom:150px">
+        <div class="background_cover_in_in">
+            <div style="font-size:32px">
+                <strong>
+                    Plan
+                </strong>
+            </div>
+        </div>
+    </div>
+</header>
+<hr class="container featurette-divider" style="margin-top:10px; margin-bottom:10px; width:1140px">
+
+<div class = "container">
+<div class = "row">
+    <div class ="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <%= month_calendar events: @meetings do |date, meetings| %>
+        <%= date %>
+        <% meetings.each do |meeting| %>
+          <div>
+            <%= meeting.name %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div ="col-xs-12 col-sm-12 col-md-4 col-lg-4" align="center">
+      <a href ="/meetings/new">
+        <button id ="btn" type="button" class="btn btn-default btn-xs">Make a new plan</button>
+      </a></br>
+       <div class = "row" style="overflow:scroll; overflow-x:hidden; margin-top:20px; margin-left:0px; margin-right:0px; height:420px">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th style="padding-left:5px">Start time</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @meetings.each do |meeting| %>
+              <tr>
+                <td><%= meeting.name %></td>
+                <td><%= meeting.start_time %></td>
+                <td style="padding-left:5px"><%= link_to 'Show', meeting %></td>
+                <td style="padding-left:5px"><%= link_to 'Destroy', meeting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
